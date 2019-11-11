@@ -66,6 +66,8 @@ async function opt(input, output, optflags, cwd) {
 }
 
 const srcs = [
+  'zlib-exports',
+
   'zlib/adler32',
   'zlib/compress',
   'zlib/crc32',
@@ -81,7 +83,6 @@ const srcs = [
   'zlib/trees',
   'zlib/uncompr',
   'zlib/zutil',
-  'zlib-exports',
 ];
 
 (async () => {
