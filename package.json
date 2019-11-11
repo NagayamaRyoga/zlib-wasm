@@ -1,0 +1,24 @@
+{
+  "name": "zlib-wasm",
+  "version": "1.0.0",
+  "description": "Zlib port for WebAssembly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/NagayamaRyoga/zlib-wasm.git"
+  },
+  "keywords": [
+    "zlib",
+    "wasm",
+    "WebAssembly"
+  ],
+  "author": "NagayamaRyoga",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/NagayamaRyoga/zlib-wasm/issues"
+  },
+  "homepage": "https://github.com/NagayamaRyoga/zlib-wasm#readme"
+}
