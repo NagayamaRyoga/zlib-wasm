@@ -66,8 +66,6 @@ async function opt(input, output, optflags, cwd) {
 }
 
 const srcs = [
-  'zlib-exports',
-
   'zlib/adler32',
   'zlib/compress',
   'zlib/crc32',
@@ -93,9 +91,19 @@ const srcs = [
     srcs.map(src => clang(`../src/${src}.c`, `./${src}.bc`, cflags, buildDir)),
   );
 
-  // *.bc -> zlib.bc
+  // *.c -> *.bc
+  await clang(`../src/zlib-exports.c`, `./zlib-exports.bc`, cflags, buildDir);
+
+  // *.bc -> zlib-lib.bc
   await link([
-    ...srcs.map(src => `./${src}.bc`),
+    ...srcs.map(s => `./${s}.bc`),
+  ], `./zlib-lib.bc`, [
+  ], buildDir);
+
+  // zlib-exports.bc zlib-lib.bc -> zlib.bc
+  await link([
+    `./zlib-exports.bc`,
+    `./zlib-lib.bc`,
     `${cli.basedir}/lib/webassembly.bc`,
   ], 'zlib.bc', [
     '-only-needed',
