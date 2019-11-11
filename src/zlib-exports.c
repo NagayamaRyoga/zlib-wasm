@@ -6,7 +6,7 @@
 
 #include "import.h"
 
-#define RAW_DATA_SIZE ((uInt)2 * 1024 * 1024)
+#define RAW_DATA_SIZE ((uInt)20 * 1024 * 1024)
 
 static unsigned char *make_random_bytes(uInt size) {
     unsigned char *buffer = malloc(size);
@@ -16,6 +16,42 @@ static unsigned char *make_random_bytes(uInt size) {
     }
 
     return buffer;
+}
+
+export void run_benchmark(void) {
+    // Make a random byte sequence
+    srand(0);
+    unsigned char *raw_bytes = make_random_bytes(RAW_DATA_SIZE);
+
+    int level = 9;
+    int n = 10;
+
+    uLongf deflated_size = compressBound(RAW_DATA_SIZE);
+    unsigned char *deflated_bytes = malloc(deflated_size);
+
+    // Warming up
+    start_warm();
+
+    for (int i = 0; i < 5; i++) {
+        int start_time = now();
+        compress2(deflated_bytes, &deflated_size, raw_bytes, RAW_DATA_SIZE, level);
+        int end_time = now();
+        int duration = end_time - start_time;
+
+        print(duration);
+    }
+
+    // Benchmark
+    start_bench();
+
+    for (int i = 0; i < n; i++) {
+        int start_time = now();
+        compress2(deflated_bytes, &deflated_size, raw_bytes, RAW_DATA_SIZE, level);
+        int end_time = now();
+        int duration = end_time - start_time;
+
+        print(duration);
+    }
 }
 
 export int run_test(void) {
