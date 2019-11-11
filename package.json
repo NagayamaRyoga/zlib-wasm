@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/NagayamaRyoga/zlib-wasm/issues"
   },
-  "homepage": "https://github.com/NagayamaRyoga/zlib-wasm#readme"
+  "homepage": "https://github.com/NagayamaRyoga/zlib-wasm#readme",
+  "dependencies": {
+    "webassembly": "^0.11.0"
+  }
 }
